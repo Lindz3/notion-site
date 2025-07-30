@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Quantitative UX: Analysing Usability &amp; Workload of Medical AI</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2127147d-4c0a-81d8-8d24-d309bb0fdccf" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/gradients_11.jpg" style="object-position:center 40%"/><h1 class="page-title">Quantitative UX: Analysing Usability &amp; Workload of Medical AI</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-text"><th><span class="icon property-icon"><div data-testid="/icons/description_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/description_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/description_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Project Overview</th><td>This project explores the <strong>usability and cognitive workload</strong> experienced by radiologists when interacting with two AI systems used in medical imaging.                                </td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><div data-testid="/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Category</th><td><span class="selected-value select-value-color-default">UX Research</span></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><div data-testid="/icons/calendar_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Date</th><td><time>@June 14, 2025</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><div data-testid="/icons/list_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/list_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/list_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>My Role</th><td><span class="selected-value select-value-color-yellow">UX Research</span></td></tr></tbody></table></header><div class="page-body"><figure id="2207147d-4c0a-803b-bc14-cf583991117c" class="image"><a href="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/098797b8-7f6c-4f48-b793-7a10f7d8df2a.png"><img style="width:590.7692307692308px" src="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/098797b8-7f6c-4f48-b793-7a10f7d8df2a.png"/></a></figure><p id="2207147d-4c0a-804b-8899-d194335530a1" class="">
+</p><h2 id="2127147d-4c0a-80e0-8d97-eeb24d980ae6" class="">🔍 Why I Did This</h2><p id="2207147d-4c0a-8083-b415-c9ac0153fd5b" class="">I revisited a university assignment originally completed using SPSS to strengthen my skills in <strong>R (statistical programming), data analysis, and UX-focused data visualisation</strong>.</p><p id="2207147d-4c0a-80ff-b6c4-e4c0af923dd8" class="">My goal was to build a <strong>portfolio piece</strong> that demonstrates how I can evaluate user experience with <strong>validated metrics</strong>—tools that have been tested to reliably measure usability and workload.</p><p id="2207147d-4c0a-806a-8b76-f96202107bce" class="">This was a <strong>self-directed project</strong>. I reanalysed a dataset where radiologists evaluated <strong>two different AI systems used for medical imaging</strong>.</p><hr id="2127147d-4c0a-80ac-bb03-f44679153b3e"/><h2 id="2127147d-4c0a-80e2-a2b7-ee8ea6c007cc" class="">🎯 The Goal</h2><p id="2207147d-4c0a-8025-8821-e130f8ee7b0b" class="">I wanted to <strong>compare the two AI systems</strong> on:</p><ul id="2207147d-4c0a-80db-9071-f503cf140174" class="bulleted-list"><li style="list-style-type:disc"><strong>System Usability</strong> – How easy and pleasant the system is to use.</li></ul><ul id="2207147d-4c0a-80a2-a9f4-c6017e70bb65" class="bulleted-list"><li style="list-style-type:disc"><strong>Task Load</strong> – How mentally demanding the system feels.</li></ul><p id="2207147d-4c0a-809a-8eac-d0e4495fa5bb" class="">To measure these, I used <strong>two well-established UX questionnaires</strong>:</p><ul id="2207147d-4c0a-80e0-b8b3-db4ca67dd2c4" class="bulleted-list"><li style="list-style-type:disc"> <strong>SUS – System Usability Scale</strong><p id="2207147d-4c0a-8048-b693-f98bbd3b250f" class=""><em>A short survey with 10 questions rated on a 1–5 scale (higher = better usability).</em></p></li></ul><ul id="2207147d-4c0a-80b3-bd01-e5060f029ed2" class="bulleted-list"><li style="list-style-type:disc"><strong>NASA-TLX – Task Load Index</strong><p id="2207147d-4c0a-8096-abdf-d420356e612c" class=""><em>A 6-question survey that assesses mental and physical workload. Originally on a 0–100 scale, I rescaled it to 1–5 for easier comparison.</em></p></li></ul><hr id="2127147d-4c0a-802f-868b-c0d2ecbe4627"/><h2 id="2127147d-4c0a-8099-930d-faf4b1a8ad5b" class="">🧹 Cleaning &amp; Preparing the Data</h2><p id="2127147d-4c0a-80a0-8905-cd47944611ae" class="">Before analysing, I checked and corrected:</p><ul id="2207147d-4c0a-80df-863c-cc8bc730c46c" class="bulleted-list"><li style="list-style-type:disc"><strong>Data types and structure</strong> – making sure each variable was in the right format.</li></ul><ul id="2207147d-4c0a-8031-9ddb-d40ec189ea3b" class="bulleted-list"><li style="list-style-type:disc"><strong>Missing values</strong> – ensuring all questions were answered.</li></ul><ul id="2207147d-4c0a-80b0-82da-f75974f60cfa" class="bulleted-list"><li style="list-style-type:disc"><strong>Out-of-range entries</strong> – e.g., scores outside expected scales.</li></ul><p id="2207147d-4c0a-8019-9d87-df5f186451d5" class=""><strong>Key transformations I applied:</strong></p><table id="2127147d-4c0a-80cc-88f5-c74d2985724b" class="simple-table"><tbody><tr id="2127147d-4c0a-80f9-8a3b-ca66c36a11cc"><td id="]X`L" class=""><strong>Fix</strong></td><td id="O:Td" class=""><strong>Why?</strong></td><td id="&lt;zS&gt;" class=""><strong>Result</strong></td></tr><tr id="2127147d-4c0a-8029-ac44-db0f7c2dff95"><td id="]X`L" class="">Reverse-coded SUS items (2, 4, 6, 8, 10)</td><td id="O:Td" class="">These questions were phrased negatively	</td><td id="&lt;zS&gt;" class="">All items now consistently reflect that higher scores = better usability</td></tr><tr id="2127147d-4c0a-8076-a134-f65b9ff09dcf"><td id="]X`L" class="">Rescaled TLX from 0–100 to 1–5</td><td id="O:Td" class="">TLX scores were ~20x larger than SUS</td><td id="&lt;zS&gt;" class="">Scales became easier to compare and visualise side by side</td></tr></tbody></table><hr id="2127147d-4c0a-8088-877d-ee8f4e12415b"/><h2 id="2127147d-4c0a-80ec-8c59-d012920da9a0" class="">📊 What the Data Looked Like</h2><h3 id="2127147d-4c0a-807d-a202-cfcdd933dea0" class="">TLX &amp; SUS Item Distribution</h3><figure id="2127147d-4c0a-8092-8e1e-fd14ffbf13eb" class="image"><a href="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/image.png"><img style="width:709.96875px" src="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/image.png"/></a></figure><blockquote id="2127147d-4c0a-80d1-8686-d2f3c512a87e" class=""><strong>How to read this boxplot:</strong><ul id="2207147d-4c0a-8000-a32c-d522453b0f6a" class="bulleted-list"><li style="list-style-type:disc">Each box shows how people scored each question.</li></ul><ul id="2207147d-4c0a-80c1-9138-df9907d94356" class="bulleted-list"><li style="list-style-type:disc"><strong>SUS items (left)</strong> clustered around high scores (4–5), suggesting users generally found the systems easy to use.</li></ul><ul id="2207147d-4c0a-80eb-ac94-c99f017f1b3a" class="bulleted-list"><li style="list-style-type:disc"><strong>TLX items (right)</strong> had lower scores (1–2), indicating low perceived workload.</li></ul><ul id="2207147d-4c0a-8091-b5f0-cb5708d4aced" class="bulleted-list"><li style="list-style-type:disc">Red dots are <em>outliers</em>—occasional users who reported higher workload.</li></ul></blockquote><p id="2207147d-4c0a-8086-a51b-da71f8b7ed09" class="">
+</p><hr id="2127147d-4c0a-80bc-b504-ecbd7d02cbd0"/><h2 id="2127147d-4c0a-8024-8653-d1e5aa4a052e" class="">🔄 Combining Scores</h2><p id="2207147d-4c0a-8037-8709-f0cb67e287b3" class="">I averaged the SUS and TLX items for each participant. This produced:</p><ul id="2207147d-4c0a-8055-b5ab-c55e20341974" class="bulleted-list"><li style="list-style-type:disc"><strong>Usability Score (SUS)</strong>: overall perception of system ease of use.</li></ul><ul id="2207147d-4c0a-8070-ab9b-f58ae7439b58" class="bulleted-list"><li style="list-style-type:disc"><strong>Workload Score (TLX)</strong>: overall mental/physical effort required.</li></ul><table id="2127147d-4c0a-805a-824c-df49b5eaa63d" class="simple-table"><tbody><tr id="2127147d-4c0a-8028-8543-cf9627453890"><td id="vLyM" class=""><strong>AI System</strong></td><td id="Ufl|" class=""><strong>SUS Mean (1-5)</strong></td><td id="Bppy" class=""><strong>TLX Mean (1-5)</strong></td></tr><tr id="2127147d-4c0a-8045-b7d3-dcabbbe6a0aa"><td id="vLyM" class=""><strong>System 1</strong></td><td id="Ufl|" class="">4.18</td><td id="Bppy" class="">1.70</td></tr><tr id="2127147d-4c0a-803a-9de8-c1d87f44abc3"><td id="vLyM" class=""><strong>System 2</strong></td><td id="Ufl|" class="">4.40</td><td id="Bppy" class="">1.64</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2207147d-4c0a-80a3-bed3-f027d7f4c0dd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="2207147d-4c0a-80ff-a76a-c71aba1068e4" class=""><strong>Takeaway: <br/><br/></strong>Both systems were rated highly usable and low in workload.</p></div></figure><p id="21f7147d-4c0a-806e-9fe8-f0ad8962e1f5" class="">
+</p><hr id="2127147d-4c0a-807c-bf0a-f01eb818340e"/><h2 id="2207147d-4c0a-8019-a2fb-c35622ddb2ed" class="">🧪 Testing Reliability</h2><p id="21f7147d-4c0a-8002-8713-c01f4e48eae3" class="">I tested internal consistency to confirm that, in my respondents’ answers, all the items measured the same idea. A high Cronbach’s alpha shows it’s valid to average them into a single score.</p><p id="2207147d-4c0a-8062-b09f-d8a2e37d1e50" class="">If a scale is reliable, its items are consistent in measuring the same thing.</p><p id="2207147d-4c0a-8025-aa96-e58a4e7b0bfc" class="">I tested this with <strong>Cronbach’s alpha</strong>, where higher values (close to 1) mean stronger internal consistency.</p><table id="2127147d-4c0a-8037-b284-d87da77bbfbc" class="simple-table"><tbody><tr id="2127147d-4c0a-808d-8d8b-c2314137fec0"><td id="hgAU" class=""><strong>Scale</strong></td><td id="Q`XD" class=""><strong>Cronbach’s α</strong></td><td id="liZM" class=""><strong>Interpretation</strong></td></tr><tr id="2127147d-4c0a-8081-a441-fce0431e8b9e"><td id="hgAU" class="">SUS</td><td id="Q`XD" class="">0.84</td><td id="liZM" class="">✅ Strong reliability</td></tr><tr id="2127147d-4c0a-803f-b772-cf8ed6ccf459"><td id="hgAU" class="">TLX</td><td id="Q`XD" class="">0.86</td><td id="liZM" class="">✅ Strong reliability</td></tr></tbody></table><hr id="2127147d-4c0a-80eb-be18-dae857022f77"/><h2 id="2207147d-4c0a-8038-a1af-fcee8ed1283f" class="">🔗 Do These Scales Measure Different Things?</h2><p id="2207147d-4c0a-803c-adc5-f13c032b8dbf" class="">I created a <strong>correlation matrix</strong> showing how each question of the surveys (SUS and TLX) relates to the others.</p><p id="2207147d-4c0a-8013-9d31-f60c84d1275b" class=""><strong>Interpretation:</strong></p><ul id="2207147d-4c0a-8052-b486-e746bbd0d629" class="bulleted-list"><li style="list-style-type:disc">High correlations within each scale (SUS questions correlate strongly with each other).</li></ul><ul id="2207147d-4c0a-809c-b48d-f5f865b48ece" class="bulleted-list"><li style="list-style-type:disc">Low or negative correlations between SUS and TLX questions.</li></ul><h3 id="2207147d-4c0a-8013-a41a-d8075047f4be" class="">Correlation Matrix Heatmap of SUS and TLX items</h3><figure id="2127147d-4c0a-80e5-a145-f89a3f4eb313" class="image"><a href="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/image%201.png"><img style="width:709.96875px" src="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/image%201.png"/></a><figcaption><em>Heatmap: Darker colours = stronger correlation</em></figcaption></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2207147d-4c0a-80ff-82db-f1a547688099"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="2207147d-4c0a-80de-a092-e32bd5025500" class=""><strong>Takeaway:</strong></p><p id="2207147d-4c0a-805b-bd84-ec972eefc6e9" class="">This supports <strong>divergent validity</strong>—meaning usability and workload are truly different experiences.</p></div></figure><hr id="2127147d-4c0a-80b9-9839-fe7dd3ea7e1c"/><h2 id="2207147d-4c0a-80d2-b714-e402c2cefc28" class="">📉 Do the Scores Follow a Normal Distribution?</h2><p id="2207147d-4c0a-806b-8f7d-cf9e87886280" class="">Many statistical tests assume data is <strong>normally distributed (bell-shaped curve)</strong>.</p><p id="2207147d-4c0a-80ac-ab1a-f3a1e2228676" class="">I checked this using <strong>Shapiro-Wilk tests</strong>, which test whether scores differ significantly from normal.</p><ul id="2207147d-4c0a-801f-9a3c-e46fae1a82ad" class="bulleted-list"><li style="list-style-type:disc">All scores were <strong>non-normal</strong> (p &lt; 0.001).</li></ul><ul id="2207147d-4c0a-800a-b678-f4d18ef1084a" class="bulleted-list"><li style="list-style-type:disc">Therefore, I used <strong>non-parametric tests</strong> (Wilcoxon) that don’t require normality.</li></ul><h3 id="2207147d-4c0a-80e7-898b-e05fbaa31ec9" class="">Distribution SUS and TLX Scores by AI System</h3><figure id="2207147d-4c0a-8014-97c4-c7f7dd4ea4cc" class="image"><a href="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/7b47f311-d472-48f3-b33c-eab135e0fae6.png"><img style="width:593.0522765598652px" src="Quantitative%20UX%20Analysing%20Usability%20&amp;%20Workload%20of%20%202127147d4c0a81d88d24d309bb0fdccf/7b47f311-d472-48f3-b33c-eab135e0fae6.png"/></a></figure><blockquote id="2207147d-4c0a-8075-aece-e49d7934963b" class="">Distributions show System Usability Scale (SUS) scores and rescaled NASA-TLX scores (normalized to a 1–5 range for comparability) by AI system. Higher SUS indicates greater perceived usability; higher TLX indicates greater perceived workload.</blockquote><hr id="2127147d-4c0a-8077-be19-c659e4a63435"/><h2 id="2127147d-4c0a-8021-8c25-f22e720f1ff4" class="">⚖️ Statistical Comparison Between Systems</h2><table id="2127147d-4c0a-80ad-a503-df8a50c137fc" class="simple-table"><tbody><tr id="2127147d-4c0a-804d-95b0-fa2b28db2aa4"><td id="GuT@" class=""><strong>Metric</strong></td><td id="}Agy" class=""><strong>p-value</strong></td><td id="B&gt;mc" class="" style="width:277px"><strong>Conclusion</strong></td></tr><tr id="2127147d-4c0a-8072-b960-f6c65359eb6b"><td id="GuT@" class=""><strong>TLX Score</strong></td><td id="}Agy" class="">0.353</td><td id="B&gt;mc" class="" style="width:277px">❌ No significant difference in workload</td></tr><tr id="2127147d-4c0a-80c7-ae48-f35cff26692c"><td id="GuT@" class=""><strong>SUS Score</strong></td><td id="}Agy" class="">0.008</td><td id="B&gt;mc" class="" style="width:277px">✅ Significant difference in usability</td></tr></tbody></table><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2207147d-4c0a-8033-b7d2-de3808418c0e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="2207147d-4c0a-801f-acaf-d58f771d44ca" class=""><strong>Takeaway:</strong></p><ul id="2207147d-4c0a-802d-adf3-e8f5bab1fc20" class="bulleted-list"><li style="list-style-type:disc">Only usability differed significantly: <strong>System 2 was rated more usable</strong>.</li></ul><ul id="2207147d-4c0a-808d-bd52-c29815696b0c" class="bulleted-list"><li style="list-style-type:disc">A <strong>p-value &lt; 0.05</strong> means the difference is statistically significant.</li></ul></div></figure><hr id="2127147d-4c0a-80a2-9106-fa320f8a5500"/><h2 id="2127147d-4c0a-8020-85aa-e8ff21e4c267" class="">🧠 Summary of UX Insights</h2><p id="2207147d-4c0a-80b0-a234-fa3b057549fa" class="">✅ <strong>System 2 was preferred for usability.</strong></p><p id="2207147d-4c0a-80fe-96bf-ca12dc53e682" class="">Users found it easier to use and felt more confident.</p><p id="2207147d-4c0a-8093-bc21-cb31f34c37cc" class="">⚖️ <strong>Workload was similar between systems.</strong></p><p id="2207147d-4c0a-8034-a4e3-cae03bcfac82" class="">Neither imposed excessive mental or physical demands.</p><hr id="2127147d-4c0a-8065-88ce-cab11c3eff88"/><h2 id="2127147d-4c0a-804f-9fa5-f802d3cf7f84" class="">📘 What This Shows About My UX Analysis Skills</h2><p id="2127147d-4c0a-8064-a799-de5bf0472b66" class="">This project demonstrates:</p><ul id="2207147d-4c0a-807a-89d9-e7e2d84d3274" class="bulleted-list"><li style="list-style-type:disc">📊 <strong>Quantitative UX research</strong>—using surveys to measure user experience.</li></ul><ul id="2207147d-4c0a-804a-a18e-c185f1e1a6e1" class="bulleted-list"><li style="list-style-type:disc">🧹 <strong>Data cleaning and preparation</strong>—ensuring results are accurate and comparable.</li></ul><ul id="2207147d-4c0a-804a-bd6b-d7ed84287f42" class="bulleted-list"><li style="list-style-type:disc">🧠 <strong>Psychometric analysis</strong>—checking reliability and validity of measures.</li></ul><ul id="2207147d-4c0a-80b6-8280-c5ed255627d5" class="bulleted-list"><li style="list-style-type:disc">🖼 <strong>Visualisation</strong>—creating clear charts for both technical and non-technical audiences.</li></ul><ul id="2207147d-4c0a-80e9-9280-e0a33c64bbfa" class="bulleted-list"><li style="list-style-type:disc">🧭 <strong>Actionable UX insights</strong>—translating numbers into findings that inform design decisions.</li></ul><hr id="2127147d-4c0a-80b4-8b16-e9e2a0b0c6d9"/><h2 id="2207147d-4c0a-808b-aa7b-d837ff56ce95" class="">💬 Interested in the Details?</h2><p id="2207147d-4c0a-8002-91a3-f62c4990e7f7" class="">I’m happy to walk you through the R code, share the data preparation steps, or discuss how this approach supports evidence-based UX design.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Oneflare Handyman Landing Page: Designing a Bridge for Acquisition</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2127147d-4c0a-81e6-a06a-ef2032abb6a6" class="page sans"><header><img class="page-cover-image" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/handyman-oneflare%202.png" style="object-position:center 29.51%"/><h1 class="page-title">Oneflare Handyman Landing Page: Designing a Bridge for Acquisition</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-text"><th><span class="icon property-icon"><div data-testid="/icons/description_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/description_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/description_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Project Overview</th><td>My task was to design a Handyman landing page for the Oneflare website that not only improved the user experience for finding handyman services but also seamlessly incorporated Airtasker profiles. </td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><div data-testid="/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/arrow-circle-down_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Category</th><td><span class="selected-value select-value-color-brown">UX Design</span></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><div data-testid="/icons/calendar_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/calendar_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>Date</th><td><time>@December 14, 2021</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><div data-testid="/icons/list_gray.svg" style="width:14px;height:14px;flex-shrink:0;transform:scale(1.2);mask:url(/icons/list_gray.svg?mode=light) no-repeat center;-webkit-mask:url(/icons/list_gray.svg?mode=light) no-repeat center;background-color:rgba(71, 70, 68, 0.6);fill:rgba(71, 70, 68, 0.6)"></div></span>My Role</th><td><span class="selected-value select-value-color-gray">UI Design</span><span class="selected-value select-value-color-gray">UX Design</span></td></tr></tbody></table></header><div class="page-body"><figure id="22e7147d-4c0a-808d-b0d6-e2b7a7801305" class="image"><a href="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/oneflare-airtasker.png"><img style="width:709.9375px" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/oneflare-airtasker.png"/></a></figure><h1 id="22e7147d-4c0a-8063-bbf8-ce4cb723638f" class="">Oneflare Handyman Landing Page: Designing a Bridge for Acquisition</h1><p id="22e7147d-4c0a-8016-8671-fedd42ac7804" class="">As a Product Designer at Oneflare, I led the UX design for the Handyman landing page, a project with a unique strategic twist: it involved integrating Airtasker profiles shortly before Oneflare&#x27;s acquisition by Airtasker. This wasn&#x27;t just about crafting an appealing page; it was about designing a seamless user experience that anticipated and facilitated a significant business transition.</p><figure id="22e7147d-4c0a-80b1-9870-e8c43eb525b4" class="image"><a href="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/handyman-oneflare.png"><img style="width:709.984375px" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/handyman-oneflare.png"/></a></figure><hr id="22e7147d-4c0a-80ce-9f41-e5d3f3796b35"/><h2 id="22e7147d-4c0a-80e4-93c1-ea94b1227912" class="">The UX Challenge: Strategic Integration &amp; User Handoff</h2><p id="22e7147d-4c0a-8057-9019-ca7c2f1c01aa" class="">Our goal was to enhance the user experience for finding handyman services on Oneflare while simultaneously preparing for the impending Airtasker acquisition. This meant not only designing a new landing page but also building a <strong>transparent and intuitive flow</strong> for users who clicked on integrated Airtasker profiles. The core UX challenge was to manage user expectations and provide a smooth, clear transition between the two platforms, even before the acquisition was finalised.</p><hr id="22e7147d-4c0a-80e9-a6e5-e444957f4d7a"/><h2 id="22e7147d-4c0a-803d-8338-de94eaf0e6d3" class="">My UX Design Process: From Flow to Figma Prototype</h2><p id="22e7147d-4c0a-803e-ba6c-f8d6d77f99aa" class="">My process for this project was rooted in user-centred design, adapted to the dynamic business environment.</p><h3 id="22e7147d-4c0a-8029-81cd-da1a4e7af12d" class="">Mapping the User Journey with Flows</h3><p id="22e7147d-4c0a-805a-ae9b-d02041f66cd6" class="">I began by <strong>mapping the complete user journey</strong> with detailed flow diagrams. This critical step allowed me to visualise every touchpoint and decision point, especially the crucial cross-platform handoff. The flow below highlights the intended user path:</p><figure id="22e7147d-4c0a-80e5-a68d-cf53f6adebac" class="image"><a href="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/flow.png"><img style="width:709.890625px" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/flow.png"/></a></figure><p id="22e7147d-4c0a-80b5-b3eb-d7f60770e2ae" class="">
+</p><p id="22e7147d-4c0a-8001-b5c5-c99f6512e6f6" class="">This meticulous mapping ensured we created a seamless user journey, particularly demonstrating the need for an <strong>interstitial redirect page</strong>. This page was a vital UX component, serving as a clear message to the user that they were transitioning between brands, thereby managing expectations and minimising confusion during the handover.</p><h3 id="22e7147d-4c0a-8002-ab25-e8015cfc4f17" class="">Prototyping the Full Experience in Figma</h3><p id="22e7147d-4c0a-80f6-bf9b-d64e06f99b95" class="">Moving beyond static mockups, I developed a <strong>comprehensive, interactive prototype in Figma</strong>. This prototype didn&#x27;t just show the landing page; it brought the entire user journey to life, allowing stakeholders to experience:</p><ol type="1" id="22e7147d-4c0a-800e-8c46-c2c297de84be" class="numbered-list" start="1"><li><strong>Interaction with the redesigned Handyman landing page.</strong></li></ol><ol type="1" id="22e7147d-4c0a-8070-bcc9-d92d38ea5948" class="numbered-list" start="2"><li><strong>Clicking on integrated Airtasker profiles.</strong></li></ol><ol type="1" id="22e7147d-4c0a-80bd-b205-dfeb7cb64027" class="numbered-list" start="3"><li><strong>The interstitial redirect page</strong> in action, demonstrating its role in the transition.</li></ol><ol type="1" id="22e7147d-4c0a-80ff-9383-caa8bb88cfbb" class="numbered-list" start="4"><li><strong>The seamless redirection to the Airtasker &quot;Post a Task&quot; page.</strong></li></ol><p id="22e7147d-4c0a-8001-9f66-c2893a1830d1" class="">Leveraging Oneflare&#x27;s <strong>existing design system</strong>, I quickly iterated on designs and ensured consistency. A key aspect was <strong>modifying existing card components</strong> to subtly yet clearly incorporate the Airtasker logo alongside Oneflare&#x27;s branding. This demonstrated my ability to adapt and extend an established design system while maintaining brand harmony and preparing users for the future.</p><hr id="22e7147d-4c0a-80c9-9dc0-fbf270c8e648"/><h2 id="22e7147d-4c0a-80ea-acc7-efbee9cedc6f" class="">The UX Solution: Intuitive Integration &amp; Responsive Design</h2><p id="22e7147d-4c0a-809a-9890-e1cf5e56031d" class="">The final design for the Handyman landing page successfully integrated Airtasker profiles, offering users a comprehensive and clear pathway to services.</p><figure id="22e7147d-4c0a-8092-ab76-c55c88d16182" class="image"><a href="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/screencapture-oneflare-au-handyman-2022-05-27-15_10_12_1.png"><img style="width:432px" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/screencapture-oneflare-au-handyman-2022-05-27-15_10_12_1.png"/></a><figcaption><em>A full-page view of the redesigned Oneflare Handyman landing page, showcasing the seamless integration of Airtasker profiles </em></figcaption></figure><p id="22e7147d-4c0a-80a5-8156-f80e677c859d" class="">The full-page design shows how the Airtasker integration was naturally woven into Oneflare&#x27;s aesthetic, ensuring a cohesive user experience despite the introduction of external elements.</p><p id="22e7147d-4c0a-80f4-913c-ddf97d0a50a3" class="">Crucially, the design was <strong>fully responsive</strong>, providing an optimised and consistent user experience across both desktop and mobile devices. This focus on responsiveness ensured accessibility and usability for all users, regardless of their preferred device.</p><figure id="22e7147d-4c0a-803f-927f-c3dc0ce2464e" class="image"><a href="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/handyman-oneflare%201.png"><img style="width:709.984375px" src="Oneflare%20Handyman%20Landing%20Page%20Designing%20a%20Bridge%20%202127147d4c0a81e6a06aef2032abb6a6/handyman-oneflare%201.png"/></a><figcaption><em>Screenshots of the redesigned Handyman landing page on both desktop and mobile devices, demonstrating optimal user experience across various screen sizes.</em></figcaption></figure><hr id="22e7147d-4c0a-8095-92e7-e8285018ca06"/><h3 id="22e7147d-4c0a-804f-97ef-f2c03f16f6ff" class="">Key Takeaways: My UX Gains</h3><p id="22e7147d-4c0a-8073-b27c-f87692748fcb" class="">This project was invaluable in shaping my capabilities as a UX Designer:</p><ul id="22e7147d-4c0a-80eb-b99d-e244b0f8b19b" class="bulleted-list"><li style="list-style-type:disc"><strong>Strategic UX Thinking:</strong> I gained significant experience in designing not just for immediate user needs, but also for broader business strategies, particularly in the context of mergers and acquisitions.</li></ul><ul id="22e7147d-4c0a-80ee-8e96-f83e97377d5f" class="bulleted-list"><li style="list-style-type:disc"><strong>Complex Flow Management:</strong> I demonstrated proficiency in mapping and prototyping intricate user journeys involving multiple platforms and crucial transitional states.</li></ul><ul id="22e7147d-4c0a-8064-9c4e-c44192b0d5d1" class="bulleted-list"><li style="list-style-type:disc"><strong>Design System Mastery:</strong> I effectively leveraged and adapted an existing design system to introduce new functionalities while maintaining brand consistency and design efficiency.</li></ul><ul id="22e7147d-4c0a-8015-9821-ce0fee5e7bce" class="bulleted-list"><li style="list-style-type:disc"><strong>Cross-Functional Collaboration:</strong> This project required close collaboration with product, engineering, and business development teams to align design solutions with strategic goals.</li></ul><ul id="22e7147d-4c0a-808c-b7ca-e406348d48de" class="bulleted-list"><li style="list-style-type:disc"><strong>User-Centric Adaptability:</strong> I honed my ability to keep the user at the forefront of design decisions even when navigating complex technical and business constraints.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2327147d-4c0a-8067-ae85-e80b43737930"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="22e7147d-4c0a-8067-abdf-d29641fd4f17" class="">This experience highlights my ability to deliver robust UX solutions in dynamic environments, ensuring user needs are met while contributing to broader business objectives.</p></div></figure><p id="22e7147d-4c0a-801b-9612-faebeb9f24a8" class="">
+</p><p id="2127147d-4c0a-8131-b60e-c1c8fd4ced4b" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
