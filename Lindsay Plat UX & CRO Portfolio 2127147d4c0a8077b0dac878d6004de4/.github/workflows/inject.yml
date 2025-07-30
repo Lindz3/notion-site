@@ -1,0 +1,52 @@
+name: Inject Custom Code
+
+on:
+  push:
+    paths:
+      - '**.html'
+      - 'custom.css'
+      - 'tracking.js'
+  workflow_dispatch:
+
+jobs:
+  inject:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install beautifulsoup4
+
+      - name: Inject custom code into HTML files
+        run: |
+          python <<EOF
+          from bs4 import BeautifulSoup
+          from pathlib import Path
+
+          html_files = Path('.').rglob('*.html')
+          for file in html_files:
+              with open(file, 'r', encoding='utf-8') as f:
+                  soup = BeautifulSoup(f.read(), 'html.parser')
+
+              link = soup.new_tag('link', rel='stylesheet', href='custom.css')
+              script = soup.new_tag('script', src='tracking.js')
+              soup.head.append(link)
+              soup.head.append(script)
+
+              with open(file, 'w', encoding='utf-8') as f:
+                  f.write(str(soup))
+          EOF
+
+      - name: Commit and push updated files
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add *.html
+          git commit -m "Auto-injected custom code"
+          git push
